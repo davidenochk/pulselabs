@@ -1,0 +1,3 @@
+<div class="d-flex justify-content-center align-items-start w-100 flex-wrap">
+    <app-voicemail-card class="m-2 p-2" *ngFor="let voicemail of voicemails | async" [voicemail]="voicemail"></app-voicemail-card>
+</div>

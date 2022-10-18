@@ -1,0 +1,35 @@
+<mat-card class="voicemail-card p-0">
+    <!-- {{voicemail | json }} -->
+    <div class="voicemail-card-heading d-flex px-2 py-1">
+        <span class="mat-body-2 text-nowrap">{{voicemail?.by}}</span>
+        <span class="w-100"></span>
+        <span class="mat-body-1 mx-1 text-nowrap text-capitalize">{{voicemail?.gender}}</span>
+        <span class="mat-body-1 mx-1 text-nowrap">{{voicemail?.age}}</span>
+        <span class="mat-body-1 mx-1  text-nowrap text-capitalize">Session {{voicemail?.session}}</span>
+        <span class="mat-body-1 mx-1 text-nowrap">{{voicemail?.date | date : "MM/dd/yyyy"}}</span>
+    </div>
+    <div class="voicemail-card-media">
+        <img src="../../../assets/img/thumbnail-img.png" class="w-100">
+    </div>
+    <div class="voicemail-card-content p-2">
+        <div class="voicemail-card-actions d-flex">
+            <button mat-button class="p-0" color="primary">SHOW QUESTIONS</button>
+            <span class="w-100"></span>
+            <button mat-icon-button color="primary">
+                <mat-icon>message</mat-icon>
+            </button>
+        </div>
+        <div class="voicemail-rating"></div>
+        <span class="mat-subheading-1 fw-bold">{{voicemail?.title}}</span>
+        <span class="mat-body-1">{{voicemail?.description}}</span>
+        <div class="d-flex justify-content-start my-2">
+            <span class="mx-1 primary fw-bold" *ngFor="let tag of voicemail?.tags">#{{tag}}</span>
+        </div>
+        <div class="d-flex justify-content-between">
+            <button mat-button class="mt-2 voicemail-type">Android Auto</button>
+            <button mat-icon-button>
+                <mat-icon>more_vert</mat-icon>
+            </button>
+        </div>
+    </div>
+</mat-card>
