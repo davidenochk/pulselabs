@@ -1,3 +1,4 @@
+import { SlicePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { Observable, of, delay } from "rxjs";
 import { data } from '../data';
@@ -11,7 +12,10 @@ export class VoicemailService {
 
   constructor() { }
 
-  getVoicemails(from: number, to: number, query: string = "") {
-    return of(this.list).pipe(delay(2000));
+  getVoicemails(from: number = 0, to: number = 1000, query: string = "") {
+    console.log(this.list.length);
+    return of(this.list.slice(from, to).filter((voice: IVoicemail) => {
+      return voice.by.toLowerCase().indexOf(query.toLowerCase()) > -1
+    }));
   }
 }

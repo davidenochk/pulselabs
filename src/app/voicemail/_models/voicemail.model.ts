@@ -1,8 +1,8 @@
 export interface IRating{
-    easeOfUse: number;
-    satisfaction: number;
-    usefulness: number;
-    preference: number;
+    easeOfUse?: number;
+    satisfaction?: number;
+    usefulness?: number;
+    preference?: number;
 }
 
 export interface IVoicemail {

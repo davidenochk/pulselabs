@@ -1,0 +1,20 @@
+@import "../../assets/scss/variables";
+
+.rating-circle {
+    height: 1.5rem;
+    width: 1.5rem;
+    color: white;
+    position: relative;
+}
+.green {
+    background-color: $rating-green;
+}
+.yellow {
+    background-color: $rating-yellow;
+}
+.red {
+    background-color: $rating-red;
+}
+.orange {
+    background-color: $rating-orange;
+}

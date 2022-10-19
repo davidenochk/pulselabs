@@ -10,6 +10,8 @@ import { IVoicemail } from '../_models/voicemail.model';
 })
 export class VoicemailListComponent implements OnInit {
   voicemails: Observable<IVoicemail[]> = of([]);
+  sortByOptions = [];
+  usersOptions = [];
   constructor(private voicemailService: VoicemailService) { }
 
   ngOnInit(): void {
@@ -17,7 +19,7 @@ export class VoicemailListComponent implements OnInit {
   }
 
   getVoicemails() {
-    this.voicemails = this.voicemailService.getVoicemails(0, 20);
+    this.voicemails = this.voicemailService.getVoicemails(0, 1000);
   }
 
 }

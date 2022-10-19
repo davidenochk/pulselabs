@@ -1,3 +1,15 @@
-<div class="d-flex justify-content-center align-items-start w-100 flex-wrap">
-    <app-voicemail-card class="m-2 p-2" *ngFor="let voicemail of voicemails | async" [voicemail]="voicemail"></app-voicemail-card>
+<div class="log">Loaded {{((voicemails | async) || []).length}}</div>
+<div class="d-flex justify-content-center m-4 p-4 align-content-start flex-column rounded">
+    <div class="mat-body-2 dim">Mostly Tap</div>
+    <div class="mat-headline fw-bold">Check your voicemail</div>
+    <div class="list-options d-flex align-items-center">
+        <span class="mat-caption me-1">SORT BY</span>
+        <app-simple-dropdown [options]="sortByOptions" selected="Date"></app-simple-dropdown>
+        <span class="ms-4 mat-caption me-1">USERS</span>
+        <app-simple-dropdown [options]="usersOptions" selected="All(7)"></app-simple-dropdown>
+    </div>
+    <div class="mt-2 d-flex justify-content-between align-items-start w-100 flex-wrap">
+        <app-voicemail-card class="my-2" *ngFor="let voicemail of voicemails | async" [voicemail]="voicemail">
+        </app-voicemail-card>
+    </div>
 </div>

@@ -1,4 +1,55 @@
-$primary: #279ffe;
-$border-radius: 5px;
-$table-heading-color: #05355B;
-$table-heading-bg: #f9f9f9;
+@use "@angular/material" as mat;
+
+$font-family: Lato;
+
+// Plus imports for other components in your app.
+
+$pulselabs-typography: mat.define-typography-config(
+  $font-family: $font-family
+);
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core($pulselabs-typography);
+
+$primary: #479eff;
+$pulselabs-palette: (
+    50: $primary,
+    100: darken($primary, 0.1),
+    200: darken($primary, 0.2),
+    300: darken($primary, 0.3),
+    400: darken($primary, 0.4),
+    500: darken($primary, 0.5),
+    600: darken($primary, 0.6),
+    700: darken($primary, 0.7),
+    800: darken($primary, 0.8),
+    900: darken($primary, 0.9),
+    contrast: (
+        50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: white,
+        400: white,
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+    )
+    
+);
+
+$pulselabs-primary: mat.define-palette($pulselabs-palette);
+$pulselabs-accent: mat.define-palette(mat.$yellow-palette);
+$pulselabs-warn: mat.define-palette(mat.$red-palette);
+
+$border-radius: 0.5rem;
+
+$dim: #7f7f7f;
+$log: red;
+
+$rating-green: #9dc284;
+$rating-yellow: #f8da78;
+$rating-orange: #e6a472;
+$rating-red: #d16d6a;

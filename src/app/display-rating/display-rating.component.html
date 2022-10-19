@@ -1,0 +1,10 @@
+<div class="d-flex justify-content-around align-items-start my-4">
+    <div *ngFor="let rating of getRatingTypes()" class="d-flex align-items-center flex-column justify-content-center">
+        <div class="d-flex justify-content-center align-items-center rating-circle circle"
+            [class.green]="getClass(rating) === 'green'" [class.orange]="getClass(rating) === 'orange'"
+            [class.red]="getClass(rating) === 'red'" [class.yellow]="getClass(rating) === 'yellow'">
+            <div class="mat-body-2 position-absolute">{{getRatingValue(rating)}}</div>
+        </div>
+        <div class="my-2 dim">{{getRatingName(rating)}}</div>
+    </div>
+</div>

@@ -1,34 +1,22 @@
+@use "@angular/material" as mat;
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use "@angular/material" as mat;
 @import "./assets/scss/variables";
+@import "./assets/scss/utilities";
 @import "./node_modules/bootstrap/scss/bootstrap";
-// Plus imports for other components in your app.
-
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat.core();
-
-$pulselabs-primary: mat.define-palette(mat.$blue-palette);
-$pulselabs-accent: mat.define-palette(mat.$yellow-palette);
-$pulselabs-typography: mat.define-typography-config(
-  $font-family: "Poppins",
-);
-
-$pulselabs-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $pulselabs-primary,
-      accent: $pulselabs-accent,
-    ),
-    typography: $pulselabs-typography,
-  )
-);
-
-@include mat.all-component-themes($pulselabs-theme);
 
 /* You can add global styles to this file, and also import other style files */
+
+$pulselabs-theme: mat.define-light-theme((
+    color: (
+        primary: $pulselabs-primary,
+        accent: $pulselabs-accent,
+        warn: $pulselabs-warn
+    ),
+    typography: $pulselabs-typography
+));
+
+@include mat.all-component-themes($pulselabs-theme);
 
 html,
 body {
@@ -37,5 +25,5 @@ body {
 
 * {
   margin: 0;
-  font-family: Poppins, "Helvetica Neue", sans-serif;
+  font-family: $font-family, "Helvetica Neue", sans-serif;
 }

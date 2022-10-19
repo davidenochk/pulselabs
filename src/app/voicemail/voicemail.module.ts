@@ -8,14 +8,16 @@ import { VoicemailListComponent } from './voicemail-list/voicemail-list.componen
 import { VoicemailCardComponent } from './voicemail-card/voicemail-card.component';
 import { VoicemailInfoComponent } from './voicemail-info/voicemail-info.component';
 import { VoicemailRoutingModule } from './voicemail-routing.module';
-
-
+import { SimpleDropdownComponent } from '../simple-dropdown/simple-dropdown.component';
+import { DisplayRatingComponent } from '../display-rating/display-rating.component';
 
 @NgModule({
   declarations: [
     VoicemailListComponent,
     VoicemailCardComponent,
-    VoicemailInfoComponent
+    VoicemailInfoComponent,
+    SimpleDropdownComponent,
+    DisplayRatingComponent
   ],
   imports: [
     CommonModule,

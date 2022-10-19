@@ -1,0 +1,15 @@
+@import "./variables";
+
+.dim {
+    color: $dim;
+}
+.log {
+    color: $log;
+    font-style: italic;
+}
+.rounded {
+    border-radius: $border-radius;
+}
+.circle {
+    border-radius: 50%;
+}
