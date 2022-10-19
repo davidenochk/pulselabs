@@ -2,7 +2,6 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import "./assets/scss/variables";
-@import "./assets/scss/utilities";
 @import "./node_modules/bootstrap/scss/bootstrap";
 
 /* You can add global styles to this file, and also import other style files */
@@ -27,3 +26,6 @@ body {
   margin: 0;
   font-family: $font-family, "Helvetica Neue", sans-serif;
 }
+
+@import "./assets/scss/utilities";
+@import "./assets/scss/blunder";

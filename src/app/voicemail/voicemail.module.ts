@@ -4,6 +4,9 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSelectModule } from "@angular/material/select";
+import { FormsModule } from "@angular/forms";
 import { VoicemailListComponent } from './voicemail-list/voicemail-list.component';
 import { VoicemailCardComponent } from './voicemail-card/voicemail-card.component';
 import { VoicemailInfoComponent } from './voicemail-info/voicemail-info.component';
@@ -25,7 +28,10 @@ import { DisplayRatingComponent } from '../display-rating/display-rating.compone
     MatIconModule,
     MatProgressSpinnerModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule
   ]
 })
 export class VoicemailModule { }

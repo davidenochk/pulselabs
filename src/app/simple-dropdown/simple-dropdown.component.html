@@ -1,4 +1,11 @@
-<div class="d-flex align-items-center">
-    <span class="primary">{{selected}}</span>
-    <mat-icon>arrow_drop_down</mat-icon>
-</div>
+<!-- <div class="ms-2 d-flex align-items-center">
+    <span class="primary fw-bold text-uppercase">{{selected}}</span>
+    <mat-icon color="primary">arrow_drop_down</mat-icon>
+</div> -->
+
+<mat-form-field class="ms-2 d-flex align-items-center" appearance="standard">
+    <!-- <mat-label class="primary fw-bold text-uppercase">{{selected}}</mat-label> -->
+    <mat-select [(ngModel)]="selected" (selectionChange)="onSelectionChange($event)">
+        <mat-option (click)="onClickOption(option)" *ngFor="let option of options" [value]="option">{{option}}</mat-option>
+    </mat-select>
+</mat-form-field>

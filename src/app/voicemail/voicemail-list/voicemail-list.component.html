@@ -4,9 +4,9 @@
     <div class="mat-headline fw-bold">Check your voicemail</div>
     <div class="list-options d-flex align-items-center">
         <span class="mat-caption me-1">SORT BY</span>
-        <app-simple-dropdown [options]="sortByOptions" selected="Date"></app-simple-dropdown>
+        <app-simple-dropdown [options]="sortOptions" [selected]="options.sort.active" (selectionChange)="onSortChange($event)"></app-simple-dropdown>
         <span class="ms-4 mat-caption me-1">USERS</span>
-        <app-simple-dropdown [options]="usersOptions" selected="All(7)"></app-simple-dropdown>
+        <app-simple-dropdown [options]="usersOptions" selected="All(7)" (selectionChange)="onUserSelected($event)"></app-simple-dropdown>
     </div>
     <div class="mt-2 d-flex justify-content-between align-items-start w-100 flex-wrap">
         <app-voicemail-card class="my-2" *ngFor="let voicemail of voicemails | async" [voicemail]="voicemail">

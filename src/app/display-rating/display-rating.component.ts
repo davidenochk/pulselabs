@@ -14,7 +14,12 @@ export enum RATINGS {
   styleUrls: ['./display-rating.component.scss']
 })
 export class DisplayRatingComponent implements OnInit {
-  @Input() ratings: IRating = {};
+  @Input() ratings: IRating = {
+    easeOfUse: 0,
+    preference: 0,
+    satisfaction: 0,
+    usefulness: 0
+  };
 
   constructor() { }
 

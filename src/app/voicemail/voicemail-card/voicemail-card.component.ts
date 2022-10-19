@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { users } from 'src/app/users';
 import { IVoicemail } from '../_models/voicemail.model';
 
 @Component({
@@ -9,6 +10,7 @@ import { IVoicemail } from '../_models/voicemail.model';
 export class VoicemailCardComponent implements OnInit {
 
   @Input() voicemail: any;
+  usersList = users;
   constructor() { }
 
   ngOnInit(): void {

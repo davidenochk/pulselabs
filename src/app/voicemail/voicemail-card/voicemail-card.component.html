@@ -1,6 +1,6 @@
 <mat-card class="voicemail-card p-0">
     <div class="voicemail-card-heading d-flex px-2 py-1">
-        <span class="mat-body-2 text-nowrap">{{voicemail?.by}}</span>
+        <span class="fw-bold mat-body-2 text-nowrap">{{usersList[voicemail?.by]}}</span>
         <span class="w-100"></span>
         <span class="mat-body-1 mx-1 text-nowrap text-capitalize">{{voicemail?.gender}}</span>
         <span class="mat-body-1 mx-1 text-nowrap">{{voicemail?.age}}</span>
@@ -19,7 +19,7 @@
                 <mat-icon>message</mat-icon>
             </button>
         </div>
-        <span class="mat-subheading-1 fw-bold">{{voicemail?.title}}</span>
+        <span class="mat-subheading-1 fw-bold text-capitalize">{{voicemail?.title}}</span>
         <span class="mat-body-1">{{voicemail?.description}}</span>
         <div class="d-flex justify-content-start my-2">
             <span class="mx-1 primary fw-bold" *ngFor="let tag of voicemail?.tags">#{{tag}}</span>

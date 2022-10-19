@@ -1,8 +1,8 @@
-import { SlicePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { Observable, of, delay } from "rxjs";
+import { of, Observable } from "rxjs";
 import { data } from '../data';
-import { IVoicemail } from './_models/voicemail.model';
+import { users } from '../users';
+import { IFilter, IOptions, ISort, IVoicemail } from './_models/voicemail.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +12,29 @@ export class VoicemailService {
 
   constructor() { }
 
-  getVoicemails(from: number = 0, to: number = 1000, query: string = "") {
-    console.log(this.list.length);
-    return of(this.list.slice(from, to).filter((voice: IVoicemail) => {
-      return voice.by.toLowerCase().indexOf(query.toLowerCase()) > -1
-    }));
+  getVoicemails(options: IOptions): Observable<{ data: IVoicemail[], total: number }> {
+    let result = this.list.slice(options.start, options.end)
+      .filter((voice: IVoicemail) => {
+        return users[voice?.by || 0].toLowerCase().indexOf(options.query.toLowerCase()) > -1
+      });
+    if (options?.filter?.id && options?.filter?.value !== "-1") {
+      result = [...result
+        .filter((obj: IVoicemail) => {
+          return (obj as any)[options.filter.id]?.toString() === options.filter.value
+        })]
+    }
+    debugger;
+    if (options.sort.active) {
+      result = [...result.sort((a, b) => {
+        if (options.sort.active === "date")
+          return new Date(a.date).getTime() > new Date(b.date).getTime() ? (options.sort.direction === "asc" ? 1 : -1) : (options.sort.direction === "asc" ? -1 : 1)
+        else if (options.sort.active === "rating") {
+          return (a.rating?.easeOfUse + a.rating?.preference + a.rating?.satisfaction + a.rating?.usefulness) > (b.rating?.easeOfUse + b.rating?.preference + b.rating?.satisfaction + b.rating?.usefulness) ? (options.sort.direction === "asc" ? 1 : -1) : (options.sort.direction === "asc" ? -1 : 1)
+        } else {
+          return 1;
+        }
+      })]
+    }
+    return of({ data: [...result], total: this.list.length });
   }
 }
