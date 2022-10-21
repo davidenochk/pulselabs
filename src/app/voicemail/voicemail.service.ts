@@ -13,10 +13,7 @@ export class VoicemailService {
   constructor() { }
 
   getVoicemails(options: IOptions): Observable<{ data: IVoicemail[], total: number }> {
-    let result = this.list.slice(options.start, options.end)
-      .filter((voice: IVoicemail) => {
-        return users[voice?.by || 0].toLowerCase().indexOf(options.query.toLowerCase()) > -1
-      });
+    let result = this.list;
     if (options?.filter?.id && options?.filter?.value !== "-1") {
       result = [...result
         .filter((obj: IVoicemail) => {
@@ -34,6 +31,11 @@ export class VoicemailService {
         }
       })]
     }
-    return of({ data: [...result], total: this.list.length });
+    const length = result.length;
+    result = result.slice(options.start, options.end)
+      .filter((voice: IVoicemail) => {
+        return users[voice?.by || 0].toLowerCase().indexOf(options.query.toLowerCase()) > -1
+      });
+    return of({ data: [...result], total: length });
   }
 }

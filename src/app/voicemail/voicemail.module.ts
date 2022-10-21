@@ -9,7 +9,6 @@ import { MatSelectModule } from "@angular/material/select";
 import { FormsModule } from "@angular/forms";
 import { VoicemailListComponent } from './voicemail-list/voicemail-list.component';
 import { VoicemailCardComponent } from './voicemail-card/voicemail-card.component';
-import { VoicemailInfoComponent } from './voicemail-info/voicemail-info.component';
 import { VoicemailRoutingModule } from './voicemail-routing.module';
 import { SimpleDropdownComponent } from '../simple-dropdown/simple-dropdown.component';
 import { DisplayRatingComponent } from '../display-rating/display-rating.component';
@@ -18,7 +17,6 @@ import { DisplayRatingComponent } from '../display-rating/display-rating.compone
   declarations: [
     VoicemailListComponent,
     VoicemailCardComponent,
-    VoicemailInfoComponent,
     SimpleDropdownComponent,
     DisplayRatingComponent
   ],

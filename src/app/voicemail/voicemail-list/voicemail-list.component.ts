@@ -38,7 +38,7 @@ export class VoicemailListComponent implements OnInit {
     "rating": "Ratings"
   }
   scroll: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  currentPercentScrolled = 0;
+  target: any;
   constructor(private voicemailService: VoicemailService) { }
 
   ngOnInit(): void {
@@ -49,9 +49,9 @@ export class VoicemailListComponent implements OnInit {
     this.scroll.pipe(debounceTime(100))
       .subscribe(_event => {
         if (_event) {
+          this.target = _event.target;
           const percentScrolled = _event.target.scrollTop * 100 / _event.target.scrollHeight;
-          if (percentScrolled >= 80 && percentScrolled > this.currentPercentScrolled && this.options.end !== this.options.total && !this.loading) {
-            this.currentPercentScrolled = percentScrolled;
+          if (percentScrolled >= 80 && this.options.end !== this.options.total && !this.loading) {
             this.options.start = this.options.start + this.fetchLength;
             this.options.end = this.options.end + this.fetchLength > this.options.total ? this.options.total : this.options.end + this.fetchLength;
             this.loading = true;
@@ -75,17 +75,27 @@ export class VoicemailListComponent implements OnInit {
   }
 
   onSortChange(event: string) {
+    this.options.start = 0;
+    this.options.end = this.fetchLength;
     this.options.sort = {
       active: event,
       direction: this.options.sort.active === event ? (this.options.sort.direction === "asc" ? "desc" : "asc") : "asc"
     }
-    this.getVoicemails();
+    this.getVoicemails().subscribe(response => {
+      this.voicemails.next(response);
+      if(this.target) this.target.scrollTo(0, 0);
+    });
   }
 
   onUserSelected(user: any) {
+    this.options.start = 0;
+    this.options.end = this.fetchLength;
     this.options.filter.id = "by";
     this.options.filter.value = users.indexOf(user).toString();
-    this.getVoicemails();
+    this.getVoicemails().subscribe(response => {
+      this.voicemails.next(response);
+      if(this.target) this.target.scrollTo(0, 0);
+    });
   }
 
   onScroll(event: any) {
