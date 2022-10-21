@@ -23,7 +23,6 @@ export class VoicemailService {
           return (obj as any)[options.filter.id]?.toString() === options.filter.value
         })]
     }
-    debugger;
     if (options.sort.active) {
       result = [...result.sort((a, b) => {
         if (options.sort.active === "date")

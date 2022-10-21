@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { of, Observable, BehaviorSubject } from 'rxjs';
+import { of, Observable, BehaviorSubject, delay, debounceTime, map } from 'rxjs';
 import { users } from 'src/app/users';
 import { VoicemailService } from '../voicemail.service';
 import { IOptions, IVoicemail } from '../_models/voicemail.model';
@@ -12,10 +12,12 @@ import { IOptions, IVoicemail } from '../_models/voicemail.model';
 export class VoicemailListComponent implements OnInit {
   voicemails: BehaviorSubject<IVoicemail[]> = new BehaviorSubject<IVoicemail[]>([]);
   usersOptions = ["All", ...users];
-  data: Observable<{ data: IVoicemail[], total: number }> = of({ data: [], total: 0 })
+  data: Observable<{ data: IVoicemail[], total: number }> = of({ data: [], total: 0 });
+  fetchLength = 10;
+  loading = false;
   options: IOptions = {
     start: 0,
-    end: 1000,
+    end: 10,
     total: 0,
     query: "",
     sort: {
@@ -35,18 +37,41 @@ export class VoicemailListComponent implements OnInit {
     "date": "Date",
     "rating": "Ratings"
   }
+  scroll: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  currentPercentScrolled = 0;
   constructor(private voicemailService: VoicemailService) { }
 
   ngOnInit(): void {
-    this.getVoicemails();
+    this.getVoicemails()
+      .subscribe((response) => {
+        this.voicemails.next(response);
+      });
+    this.scroll.pipe(debounceTime(100))
+      .subscribe(_event => {
+        if (_event) {
+          const percentScrolled = _event.target.scrollTop * 100 / _event.target.scrollHeight;
+          if (percentScrolled >= 80 && percentScrolled > this.currentPercentScrolled && this.options.end !== this.options.total && !this.loading) {
+            this.currentPercentScrolled = percentScrolled;
+            this.options.start = this.options.start + this.fetchLength;
+            this.options.end = this.options.end + this.fetchLength > this.options.total ? this.options.total : this.options.end + this.fetchLength;
+            this.loading = true;
+            this.getVoicemails()
+              .subscribe((response) => {
+                this.loading = false;
+                const _voicemails = this.voicemails.getValue() || [];
+                this.voicemails.next([..._voicemails, ...response]);
+              });
+          }
+        }
+      })
   }
 
   getVoicemails() {
-    this.voicemailService.getVoicemails({...this.options})
-      .subscribe((response: any) => {
-        this.voicemails.next(response.data);
+    return this.voicemailService.getVoicemails({ ...this.options })
+      .pipe(map((response: any) => {
         this.options.total = response.total;
-      });
+        return response.data;
+      }));
   }
 
   onSortChange(event: string) {
@@ -61,5 +86,9 @@ export class VoicemailListComponent implements OnInit {
     this.options.filter.id = "by";
     this.options.filter.value = users.indexOf(user).toString();
     this.getVoicemails();
+  }
+
+  onScroll(event: any) {
+    this.scroll.next(event);
   }
 }

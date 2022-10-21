@@ -2,13 +2,14 @@
 <div class="d-flex justify-content-center m-4 p-4 align-content-start flex-column rounded">
     <div class="mat-body-2 dim">Mostly Tap</div>
     <div class="mat-headline fw-bold">Check your voicemail</div>
+    <mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
     <div class="list-options d-flex align-items-center">
         <span class="mat-caption me-1">SORT BY</span>
         <app-simple-dropdown [options]="sortOptions" [selected]="options.sort.active" (selectionChange)="onSortChange($event)"></app-simple-dropdown>
         <span class="ms-4 mat-caption me-1">USERS</span>
         <app-simple-dropdown [options]="usersOptions" selected="All(7)" (selectionChange)="onUserSelected($event)"></app-simple-dropdown>
     </div>
-    <div class="mt-2 d-flex justify-content-between align-items-start w-100 flex-wrap">
+    <div class="mt-2 d-flex justify-content-between align-items-start w-100 flex-wrap" style="max-height: 75vh; overflow-y: auto;" (scroll)="onScroll($event)">
         <app-voicemail-card class="my-2" *ngFor="let voicemail of voicemails | async" [voicemail]="voicemail">
         </app-voicemail-card>
     </div>
